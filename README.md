@@ -1,7 +1,9 @@
 # DevOps_online_Kharkiv_2022Q1Q2
 ![DevOps image](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/images/images/DevOps-use.jpg)
 
-##### It was my first introduction to Git:
+#### It was my first introduction to Git.
+##### First of all I want to apologize for made many changes than need because it was my first introdustion with Git!
+##### But now I know more about Git than before.
 
 - I created account on github and Installed git on the laptop.
 - I created new repo DevOps_online_Kharkiv_2022Q1Q2.
