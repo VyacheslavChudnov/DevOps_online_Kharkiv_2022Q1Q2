@@ -1,3 +1,5 @@
+# WORK WITH VIRTUALBOX - Task2.1
+
 ## First run VirtualBox and Virtual Machine (VM)
 
 ![Install first VM](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m2/task2.1/001_Install_first_VM.jpg)
@@ -33,3 +35,25 @@
 ## Examine  the  purpose  and  execute  the  basic  commands  of  VBoxManage  list, showvminfo, createvm, startvm, modifyvm, clonevm, snapshot, controlvm
 
 ![VBoxManage CLI](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m2/task2.1/030_VBoxManage_CLI.jpg)
+
+# WORK WITH VAGRANT
+
+## Init hashicorp/precise64
+
+![Init hashicorp/precise64](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m2/task2.1/032_Init_hashicorp_precise64.jpg)
+
+## Connect to the VM
+
+![Connect to the VM](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m2/task2.1/035_Connect_to_VM.jpg)
+
+## Stop and delete the created VM
+
+![Stop and delete VM](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m2/task2.1/037_Stop_and_delete_the_created_VM.jpg)
+
+## Create own Vagrant box
+
+![Create Vagrant box](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m2/task2.1/040_Create_Vagrant_box.jpg)
+
+## Init own Ubuntu 21.10 box
+
+![Init own Ubuntu](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m2/task2.1/044_Init_own_Ubuntu.jpg)
