@@ -4,11 +4,11 @@
 
 ## Login to the Linux
 
-![Login](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/screenshots_for_task4.1/task4.1/001_Login.jpg)
+![Login](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/task4.1/001_Login.jpg)
 
 ## Change password with passwd command
 
-![Change password](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/screenshots_for_task4.1/002_Change_password.jpg)
+![Change password](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/002_Change_password.jpg)
 
 ### Command passwd has many options:
 
@@ -42,39 +42,39 @@ Command **info** is more structured and is composed of multiple pages that you c
 ## Examples Linux help system commands
 
 ##### Command **$ man --help**
-![$ man help](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/screenshots_for_task4.1/003_man_help.jpg)
+![$ man help](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/003_man_help.jpg)
 
 ##### Command **$ info man**
-![$ info man](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/screenshots_for_task4.1/004_info_man.jpg)
+![$ info man](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/004_info_man.jpg)
 
 ##### Command **$ man info**
-![$ man info](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/screenshots_for_task4.1/005_man_info.jpg)
+![$ man info](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/005_man_info.jpg)
 
 ##### For searching by keyword you'd use parameter -k:
 **$ man -k passwd**
-![$ man -k passwd](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/screenshots_for_task4.1/006_man_passwd.jpg)
+![$ man -k passwd](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/006_man_passwd.jpg)
 
 #### To read man about file /etc/passwd (not about command passwd), you’d use section number:
 **$ man 5 passwd**
-![$ man 5 passwd](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/screenshots_for_task4.1/007_man_5_passwd.jpg)
+![$ man 5 passwd](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/007_man_5_passwd.jpg)
 
 #### Usind command **less**
-![command less](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/screenshots_for_task4.1/008_less.jpg)
+![command less](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/008_less.jpg)
 
 #### Usind command **more**
-![command more](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/screenshots_for_task4.1/009_more.jpg)
+![command more](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/009_more.jpg)
 
 #### Usind command **finger**
-![$ finger -lmsp](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/010_finger.jpg)
+![$ finger -lmsp](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/010_finger.jpg)
 
 #### Usind command **ls**
-![comman ls](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/011_ls.jpg)
+![comman ls](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/011_ls.jpg)
 
 # Part 2
 
 #### Examine the **tree** command
 
-![command tree](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/012_tree.jpg)
+![command tree](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/012_tree.jpg)
 
 For determine the type of file use command **file**:
 
@@ -88,7 +88,7 @@ We can use **cd /home/user** command for absolute path or **cd user** command us
 For return in the home directory from from anywhere in the filesystem we can use command **cd** or **cd~**
 
 #### Usind command **ls**
-![comman ls](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/011_ls.jpg)
+![comman ls](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/011_ls.jpg)
 
 ## 5)
 
@@ -119,7 +119,7 @@ Copying the .bash_history file to this directory while changing its name to labw
 
 #### Creating a hard and soft link to the labwork2 file in the test subdirectory
 
-![command ln](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/013_ln.jpg)
+![command ln](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/013_ln.jpg)
 
 Hard link is just another name for the original file. If you delete one of these files (more precisely one of these names), then the file is 
 still saved on disk (as long as it has at least one link name).
@@ -142,11 +142,11 @@ Command **ls** shows **symb_lnk_labwork2** now light red because useless.
 
 #### Using  the  locate  utility,  find  all  files  that  contain  the  squid  and  traceroute sequence
 
-![locate](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/014_locate.jpg)
+![locate](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/014_locate.jpg)
 
 #### Determine which partitions are mounted in the system, as well as the types of these partitions
 
-![partitions](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/015_partitions.jpg)
+![partitions](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/015_partitions.jpg)
 
 Countig the number of lines containing a sequence of **2** in a **test222.txt** file:
 **slava@ubnvm1:~$ grep 2 test222.txt | wc -l**
