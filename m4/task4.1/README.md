@@ -4,7 +4,7 @@
 ***
 ## Login to the Linux
 
-![Login](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/task4.1/001_Login.jpg)
+![Login](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.1/screenshots_for_task4.1/001_Login.jpg)
 ***
 ## Change password with passwd command
 
