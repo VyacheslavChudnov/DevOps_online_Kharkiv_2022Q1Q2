@@ -13,6 +13,19 @@
 
 ![Configure IP](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m5/task5/screenshots_for_task5/002_configure_ip.jpg)
 ***
+To apply changes use commands:
+
+```
+$ sudo netplan generate
+$ sudo netplan apply
+```
+
+To restart network service use command:
+
+```
+$ sudo systemctl restart systemd-networkd
+```
+
 ### To configure DHCP server need install dhcp server ___$ sudo apt install isc-dhcp-server___ and ___edit /etc/dhcp/dhcpd.conf___ as shown below:
 
 ![Configure DHCP](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m5/task5/screenshots_for_task5/003_configure_dhcp.jpg)
