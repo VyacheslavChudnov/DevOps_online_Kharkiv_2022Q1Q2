@@ -1,6 +1,6 @@
 # Linux - Task4.2
 ***
-___Exercise 1.___ _Analyze the structure of the /etc/passwd and /etc/group file, what fields are present in it, what users exist on the system? Specify several pseudo-users, how to define them?_
+___Exercise 1.___ _Analyze the structure of the **/etc/passwd** and **/etc/group** file, what fields are present in it, what users exist on the system? Specify several pseudo-users, how to define them?_
 
 The **/etc/passwd** file contains the following fields:
 ```
@@ -99,7 +99,7 @@ sudo passwd -d -e username
 ***
 ___Exercise 11.___ _Display the extended format of information about the directory, tell about the information columns displayed on the terminal._
 
-To display extended format use ** $ ls -la** command:
+To display extended format use **$ ls -la** command:
 ```
 $ ls -la
 -rw-rw-r-- 1 slava slava   13 Feb 23 22:40 slava.txt

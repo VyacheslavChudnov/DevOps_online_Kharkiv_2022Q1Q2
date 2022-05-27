@@ -1,6 +1,6 @@
 # Linux - Task4.3
 
-##Part 1
+## Part 1
 ***
 ___Exercise 1.___ _How many states could has a process in Linux?_
 
@@ -10,7 +10,7 @@ There are five Linux process states. In Unix/Linux operating systems, processes 
 3. UNINTERRUPTABLE_SLEEP
 4. STOPPED
 5. ZOMBIE
-
+***
 ___Exercise 2.___ _Examine the **pstree** command. Make output (highlight) the chain (ancestors) of the current process._
 
 Disable compaction of identical subtrees:
@@ -111,12 +111,15 @@ systemd─┬─VBoxService─┬─{RTThrdPP}
 ```
 **$ pstree -h** - highlight the current process and its ancestors.  This is a no-op if the terminal doesn't support highlighting or if
 neither the current process nor any of its ancestors are in the subtree being shown.
-
+***
 ___Exercise 3.___ _What is a proc file system?_
 
-```
-```
+Proc file system (procfs) is virtual file system created on fly when system boots and is dissolved at time of system shut down.
 
+It contains useful information about the processes that are currently running, it is regarded as control and information center for kernel.
+
+The proc file system also provides communication medium between kernel space and user space.
+***
 ___Exercise 4.___ _Print information about the processor (its type, supported technologies, etc.)._
 
 ```
@@ -156,7 +159,7 @@ power management:
 
 /proc/cpuinfo (END)
 ```
-
+***
 ___Exercise 5.___ _Use the ps command to get information about the process. The information should be as
 follows: the owner of the process, the arguments with which the process was launched for
 execution, the group owner of this process, etc._
@@ -166,12 +169,12 @@ the process was launched for execution, the group owner of this process, etc.:
 ```
 $ ps ax o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,comm,group,gid,cmd
 ```
-
+***
 ___Exercise 6.___ _How to define kernel processes and user processes?_
 
 When managing processes, it is easy to recognize the kernel processes
 because they have a name that is between square brackets.
-
+***
 ___Exercise 7.___ _Print the list of processes to the terminal. Briefly describe the statuses of the processes.
 What condition are they in, or can they be arriving in?_
 
@@ -226,7 +229,7 @@ the state of a process:
                l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
                +    is in the foreground process group
 ```
-
+***
 ___Exercise 8.___ _Display only the processes of a specific user._
 
 ```
@@ -249,7 +252,7 @@ slava      69843  0.4  0.3   7332  3532 ?        Ss   15:24:40 00:00:00 bash    
 slava      70634  0.0  0.0   5752   980 ?        S    15:26:56 00:00:00 sleep           slava     1000 sleep 1
 slava      70635  0.0  0.3   9896  3520 pts/1    R+   15:26:56 00:00:00 ps              slava     1000 ps -u slava o user,pid,%cpu,%me
 ```
-
+***
 ___Exercise 9.___ _What utilities can be used to analyze existing running tasks (by analyzing the help for the ps
 command)?_
 
@@ -259,8 +262,8 @@ $ top
 $ htop
 $ sudo lsof | less
 ```
-
-___Exercise 10.___ _What information does top command display?_
+***
+___Exercise 10.___ _What information does **top** command display?_
 
 The **top** program provides a dynamic real-time view of a running
 system.  It can display system summary information as well as a
@@ -269,7 +272,7 @@ kernel.  The types of system summary information shown and the
 types, order and size of information displayed for processes are
 all user configurable and that configuration can be made
 persistent across restarts.
-
+***
 ___Exercise 11.___ _Display the processes of the specific user using the top command._
 
 ```
@@ -298,7 +301,7 @@ MiB Swap:   1672.0 total,   1671.7 free,      0.3 used.    623.7 avail Mem
   69843 slava     20   0    7332   3532   3268 S   0.0   0.4   1:07.08 bash
  138801 slava     20   0    5752    924    836 S   0.0   0.1   0:00.00 sleep
 ```
-
+***
 ___Exercise 12.___ _What interactive commands can be used to control the top command? Give a couple of
 examples._
 
@@ -337,3 +340,35 @@ demonstrate the process control mechanism with fg, bg._
 
 ```
 ```
+
+## Part 2
+***
+___Exercise 1.___ _Check the implementability of the most frequently used OPENSSH commands in the MS
+Windows operating system. (Description of the expected result of the commands +screenshots:
+command – result should be presented._
+
+```
+```
+***
+___Exercise 2.___ _Implement basic SSH settings to increase the security of the client-server connection (at least)._
+
+```
+```
+***
+___Exercise 3.___ _List the options for choosing keys for encryption in SSH. Implement 3 of them._
+
+```
+```
+***
+___Exercise 4.___ _Implement port forwarding for the SSH client from the host machine to the guest Linux
+virtual machine behind NAT._
+
+```
+```
+***
+___Exercise 5.___ _Intercept (capture) traffic (tcpdump, wireshark) while authorizing the remote client on the
+server using ssh, telnet, rlogin. Analyze the result._
+
+```
+```
+***
