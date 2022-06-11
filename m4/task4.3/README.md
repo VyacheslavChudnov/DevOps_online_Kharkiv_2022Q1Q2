@@ -312,33 +312,100 @@ examples._
 * By default screen refresh interval is set to 3.0 seconds, the same can be changed by pressing the ‘d‘ option in running the top command to set desired interval time;
 * You can kill a process after finding the PID of the process by pressing the ‘k‘ option in running the top command without closing the top window;
 * To sort all running processes by CPU utilization, simply press Shift+P key.
-
+***
 ___Exercise 13.___ _Sort the contents of the processes window using various parameters (for example, the
 amount of processor time taken up, etc.)._
 
+Sort by user
 ```
+$ ps aux --sort=user
 ```
-
+Sort by CPU
+```
+$ ps aux --sort=-pcpu
+```
+Sort by Memory
+```
+$ ps aux --sort=-pmem
+```
+***
 ___Exercise 14.___ _Concept of priority, what commands are used to set priority?_
 
-```
-```
 
+The kernel stores a great deal of information about processes including process priority
+which is simply the scheduling priority attached to a process. Processes with a higher priority
+will be executed before those with a lower priority, while processes with the same priority are
+scheduled one after the next, repeatedly.
+
+There are a total of 140 priorities and two distinct priority ranges implemented in Linux.
+The first one is a nice value (niceness) which ranges from -20 (highest priority value)
+to 19 (lowest priority value) and the default is 0. The other is the real-time priority,
+which ranges from 1 to 99 by default, then 100 to 139 are meant for user-space.
+
+
+One important characteristic of Linux is dynamic priority-based scheduling, which allows
+the nice value of processes to be changed (increased or decreased) depending on your needs.
+
+To set the priority, use the commands **nice** and **renice**.
+```
+$ sudo renice -5 -p 1234
+```
+***
 ___Exercise 15.___ _Can I change the priority of a process using the top command? If so, how?_
 
-```
-```
-
+Once given **top** command, press **r**. Give PID value of the process you want to change the process value.
+Give **renice** value (from -20 to +19).
+***
 ___Exercise 16.___ _Examine the kill command. How to send with the kill command process control signal? Give
 an example of commonly used signals._
 
 ```
+slava@ubnvm1:~$ kill -l
+ 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP
+ 6) SIGABRT      7) SIGBUS       8) SIGFPE       9) SIGKILL     10) SIGUSR1
+11) SIGSEGV     12) SIGUSR2     13) SIGPIPE     14) SIGALRM     15) SIGTERM
+16) SIGSTKFLT   17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP
+21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU     25) SIGXFSZ
+26) SIGVTALRM   27) SIGPROF     28) SIGWINCH    29) SIGIO       30) SIGPWR
+31) SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3
+38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8
+43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13
+48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12
+53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7
+58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2
+63) SIGRTMAX-1  64) SIGRTMAX
+slava@ubnvm1:~$ kill -9 89288
 ```
-
+***
 ___Exercise 17.___ _Commands jobs, fg, bg, nohup. What are they for? Use the sleep, yes command to
 demonstrate the process control mechanism with fg, bg._
 
+**nohup** prevents the processes or jobs from receiving the SIGHUP (Signal Hang UP) signal.
+This is a signal that is sent to a process upon closing or exiting the terminal.
+
+On Unix-like operating systems, **bg** is a job control command.
+It resumes suspended jobs in the background, returning the user to the shell prompt while the job runs.
+
+The **fg** command, short for the foreground, is a command that moves a background process on your current Linux shell to the foreground.
+This contrasts the **bg** command, short for background, that sends a process running in the foreground to the background in the current shell.
+
+Command **jobs** lists the jobs running in the background, giving the job number.
+
+***Examples:***
 ```
+slava@Client1:~$ sleep 1000
+^Z
+[1]+  Stopped                 sleep 1000
+slava@Client1:~$ jobs
+[1]+  Stopped                 sleep 1000
+slava@Client1:~$ fg
+sleep 1000
+
+^Z
+[1]+  Stopped                 sleep 1000
+slava@Client1:~$ bg
+[1]+ sleep 1000 &
+slava@Client1:~$
 ```
 
 ## Part 2
@@ -347,28 +414,147 @@ ___Exercise 1.___ _Check the implementability of the most frequently used OPENSS
 Windows operating system. (Description of the expected result of the commands +screenshots:
 command – result should be presented._
 
+Check that the SSH client is installed:
 ```
+Windows PowerShell
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+PS C:\Windows\system32> Get-WindowsCapability -Online | ? Name -like 'OpenSSH.Client*'
+
+
+Name  : OpenSSH.Client~~~~0.0.1.0
+State : Installed
+
+
+
+PS C:\Windows\system32>
 ```
+Connection to host **ssh username@host** or **ssh username@host -p port**:
+```
+PS C:\Windows\system32> ssh slava@192.168.10.202
+```
+![OpenSSH](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.3/screenshots_for_task4.3/001_OpenSSH.jpg)
+
 ***
 ___Exercise 2.___ _Implement basic SSH settings to increase the security of the client-server connection (at least)._
 
+Change the port:
 ```
+nano /etc/ssh/sshd_config
+port 2223
 ```
+- Disable Server SSH Root Login: find the line that says “PermitRootLogin_yes“ and change to PermitRootLogin_no;
+- Add the user account you will use to log in. Just add another line with the username in question: AllowUsers your_username_here;
+- Use SSH keys to log into the server as root or with sudo privileges;
+- With iptables, you can define rules that limit or permit traffic for different kinds of services by IP address, port or network protocol and thus substantially improve the security of your
+  server. In our case, we will set firewall rules to restrict the incoming SSH traffic for everyone
+  but one IP address or subnet.
+
 ***
 ___Exercise 3.___ _List the options for choosing keys for encryption in SSH. Implement 3 of them._
 
+To generate a key-pair for the current user, execute:
 ```
+$ ssh-keygen
 ```
+We can also generate a key pair in the current directory with a specific file name using the -f flag:
+```
+$ ssh-keygen -f example
+```
+Unless otherwise specified, ssh-keygen uses the Rivest–Shamir–Adleman (RSA) algorithm when generating the key pair. We can specify another algorithm using the -t flag. For example:
+```
+$ ssh-keygen -t dsa
+
+usage: ssh-keygen ... [-t dsa | ecdsa | ed25519 | rsa]
+```
+
 ***
 ___Exercise 4.___ _Implement port forwarding for the SSH client from the host machine to the guest Linux
 virtual machine behind NAT._
 
-```
-```
+To configure port forwarding we can use the graphical Port Forwarding editor which can be found in the
+Network Settings dialog for network adaptors configured to use NAT. Here, we can map host ports to guest ports to allow network traffic to be routed to a specific port in the guest.
+
+### Port forward configuring:
+![Port_Forward](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.3/screenshots_for_task4.3/002_Port_Forward.jpg)
+
 ***
 ___Exercise 5.___ _Intercept (capture) traffic (tcpdump, wireshark) while authorizing the remote client on the
 server using ssh, telnet, rlogin. Analyze the result._
 
+Example SSH session:
 ```
+slava@ubnvm1:/etc/iptables$ sudo tcpdump -i enp0s3 -v tcp port 22
+tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+12:17:04.636637 IP (tos 0x10, ttl 64, id 4464, offset 0, flags [DF], proto TCP (6), length 104)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x96dc (incorrect -> 0x101e), seq 4227853179:4227853243, ack 2773556171, win 521, length 64
+12:17:04.636868 IP (tos 0x0, ttl 128, id 61048, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.10.103.61278 > ubnvm1.ssh: Flags [.], cksum 0x7103 (correct), ack 64, win 4098, length 0
+12:17:04.636956 IP (tos 0x10, ttl 64, id 4465, offset 0, flags [DF], proto TCP (6), length 104)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x96dc (incorrect -> 0x403b), seq 64:128, ack 1, win 521, length 64
+12:17:04.637146 IP (tos 0x10, ttl 64, id 4466, offset 0, flags [DF], proto TCP (6), length 120)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x96ec (incorrect -> 0xb6a9), seq 128:208, ack 1, win 521, length 80
+12:17:04.637297 IP (tos 0x0, ttl 128, id 61049, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.10.103.61278 > ubnvm1.ssh: Flags [.], cksum 0x7073 (correct), ack 208, win 4098, length 0
+12:17:04.637362 IP (tos 0x10, ttl 64, id 4467, offset 0, flags [DF], proto TCP (6), length 120)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x96ec (incorrect -> 0x7a94), seq 208:288, ack 1, win 521, length 80
+12:17:04.637542 IP (tos 0x10, ttl 64, id 4468, offset 0, flags [DF], proto TCP (6), length 88)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x96cc (incorrect -> 0x8c8d), seq 288:336, ack 1, win 521, length 48
+12:17:04.637739 IP (tos 0x0, ttl 128, id 61050, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.10.103.61278 > ubnvm1.ssh: Flags [.], cksum 0x6ff4 (correct), ack 336, win 4097, length 0
+12:17:04.735984 IP (tos 0x10, ttl 64, id 4469, offset 0, flags [DF], proto TCP (6), length 184)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x972c (incorrect -> 0xab36), seq 336:480, ack 1, win 521, length 144
+12:17:04.736266 IP (tos 0x10, ttl 64, id 4470, offset 0, flags [DF], proto TCP (6), length 88)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x96cc (incorrect -> 0x2db0), seq 480:528, ack 1, win 521, length 48
+12:17:04.736543 IP (tos 0x0, ttl 128, id 61051, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.10.103.61278 > ubnvm1.ssh: Flags [.], cksum 0x6f35 (correct), ack 528, win 4096, length 0
+12:17:04.848166 IP (tos 0x10, ttl 64, id 4471, offset 0, flags [DF], proto TCP (6), length 376)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x97ec (incorrect -> 0x99d0), seq 528:864, ack 1, win 521, length 336
+12:17:04.848920 IP (tos 0x10, ttl 64, id 4472, offset 0, flags [DF], proto TCP (6), length 120)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x96ec (incorrect -> 0xa567), seq 864:944, ack 1, win 521, length 80
+12:17:04.849363 IP (tos 0x0, ttl 128, id 61052, offset 0, flags [DF], proto TCP (6), length 40)
+    192.168.10.103.61278 > ubnvm1.ssh: Flags [.], cksum 0x6d96 (correct), ack 944, win 4095, length 0
+12:17:04.849505 IP (tos 0x10, ttl 64, id 4473, offset 0, flags [DF], proto TCP (6), length 88)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x96cc (incorrect -> 0x96d2), seq 944:992, ack 1, win 521, length 48
+12:17:04.850238 IP (tos 0x10, ttl 64, id 4474, offset 0, flags [DF], proto TCP (6), length 104)
+    ubnvm1.ssh > 192.168.10.103.61278: Flags [P.], cksum 0x96dc (incorrect -> 0x09bd), seq 992:1056, ack 1, win 521, length 64
+12:17:04.850750 IP (tos 0x0, ttl 128, id 61053, offset 0, flags [DF], proto TCP (6), length 40)
 ```
+Example Telnet session without access:
+```
+slava@ubnvm1:/etc/iptables$ sudo tcpdump -i enp0s3 -v tcp port 23
+tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+12:19:32.693115 IP (tos 0x0, ttl 128, id 61717, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.10.103.59274 > ubnvm1.telnet: Flags [S], cksum 0x192c (correct), seq 2261341702, win 64240, options [mss 1460,nop,wscale 8,nop,nop,sackOK], length 0
+12:19:32.693158 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto TCP (6), length 40)
+    ubnvm1.telnet > 192.168.10.103.59274: Flags [R.], cksum 0x54dc (correct), seq 0, ack 2261341703, win 0, length 0
+12:19:33.194143 IP (tos 0x0, ttl 128, id 61722, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.10.103.59274 > ubnvm1.telnet: Flags [S], cksum 0x192c (correct), seq 2261341702, win 64240, options [mss 1460,nop,wscale 8,nop,nop,sackOK], length 0
+12:19:33.194220 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto TCP (6), length 40)
+    ubnvm1.telnet > 192.168.10.103.59274: Flags [R.], cksum 0x54dc (correct), seq 0, ack 1, win 0, length 0
+12:19:33.695157 IP (tos 0x0, ttl 128, id 61728, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.10.103.59274 > ubnvm1.telnet: Flags [S], cksum 0x192c (correct), seq 2261341702, win 64240, options [mss 1460,nop,wscale 8,nop,nop,sackOK], length 0
+12:19:33.695232 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto TCP (6), length 40)
+    ubnvm1.telnet > 192.168.10.103.59274: Flags [R.], cksum 0x54dc (correct), seq 0, ack 1, win 0, length 0
+```
+Example Rlogin session without access:
+```
+slava@ubnvm1:/etc/iptables$ sudo tcpdump -i enp0s3 -v tcp port 513
+tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+12:20:55.400520 IP (tos 0x0, ttl 128, id 62096, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.10.103.1023 > ubnvm1.login: Flags [S], cksum 0x3b7c (correct), seq 2140544139, win 64240, options [mss 1460,nop,wscale 8,nop,nop,sackOK], length 0
+12:20:55.400588 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto TCP (6), length 40)
+    ubnvm1.login > 192.168.10.103.1023: Flags [R.], cksum 0x772c (correct), seq 0, ack 2140544140, win 0, length 0
+12:20:55.901685 IP (tos 0x0, ttl 128, id 62103, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.10.103.1023 > ubnvm1.login: Flags [S], cksum 0x3b7c (correct), seq 2140544139, win 64240, options [mss 1460,nop,wscale 8,nop,nop,sackOK], length 0
+12:20:55.901796 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto TCP (6), length 40)
+    ubnvm1.login > 192.168.10.103.1023: Flags [R.], cksum 0x772c (correct), seq 0, ack 1, win 0, length 0
+12:20:56.402972 IP (tos 0x0, ttl 128, id 62105, offset 0, flags [DF], proto TCP (6), length 52)
+    192.168.10.103.1023 > ubnvm1.login: Flags [S], cksum 0x3b7c (correct), seq 2140544139, win 64240, options [mss 1460,nop,wscale 8,nop,nop,sackOK], length 0
+12:20:56.403062 IP (tos 0x0, ttl 64, id 0, offset 0, flags [DF], proto TCP (6), length 40)
+    ubnvm1.login > 192.168.10.103.1023: Flags [R.], cksum 0x772c (correct), seq 0, ack 1, win 0, length 0
+```
+
+### Wireshark Interception
+![Wireshark](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m4/task4.3/screenshots_for_task4.3/003_Wireshark.jpg)
 ***
