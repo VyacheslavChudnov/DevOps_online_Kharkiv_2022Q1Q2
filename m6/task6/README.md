@@ -201,3 +201,91 @@ _In case of adding new or deleting old files, the script must add a correspondin
 indicating the time, type of operation and file name. [The command to run the script must be added to
 crontab with a run frequency of one minute]_
 
+**Bash code:**
+```
+#!/bin/bash
+TN=minute
+OF=$TN.tar
+LOGFILE=/home/slava/backups/backup.log
+
+echo  >>$LOGFILE
+echo "====================================================="  >>$LOGFILE
+echo "$(date +'%d-%b-%Y %R')" >>$LOGFILE
+
+SRCD="/home/slava/src/"
+TGTD="/home/slava/backups/"
+
+tar -cPvf $TGTD$OF $SRCD &>>/dev/null
+tar -tPvf $TGTD$OF &>>$LOGFILE
+```
+**Configure cron:**
+```
+$ crontab -e
+
+  GNU nano 5.6.1                                         /tmp/crontab.01vaMN/crontab
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# m h  dom mon dow   command
+
+* * * * * /home/slava/./new.sh
+```
+**Result:**
+```
+$ less backup.log
+=====================================================
+12-Jun-2022 09:28
+drwxrwxr-x slava/slava       0 2022-06-11 23:18 /home/slava/src/
+-rw-rw-r-- slava/slava       4 2022-06-11 17:44 /home/slava/src/3.txt
+-rw-r--r-- root/root        22 2022-06-11 23:10 /home/slava/src/5.txt
+-rw-rw-r-- slava/slava      25 2022-06-11 23:18 /home/slava/src/6.txt
+-rw-rw-r-- slava/slava   10240 2022-06-11 16:51 /home/slava/src/1.txt
+-rw-rw-r-- slava/slava      11 2022-05-01 22:08 /home/slava/src/4.log
+
+=====================================================
+12-Jun-2022 09:29
+drwxrwxr-x slava/slava       0 2022-06-11 23:18 /home/slava/src/
+-rw-rw-r-- slava/slava       4 2022-06-11 17:44 /home/slava/src/3.txt
+-rw-r--r-- root/root        22 2022-06-11 23:10 /home/slava/src/5.txt
+-rw-rw-r-- slava/slava      25 2022-06-11 23:18 /home/slava/src/6.txt
+-rw-rw-r-- slava/slava   10240 2022-06-11 16:51 /home/slava/src/1.txt
+-rw-rw-r-- slava/slava      11 2022-05-01 22:08 /home/slava/src/4.log
+
+=====================================================
+12-Jun-2022 09:30
+drwxrwxr-x slava/slava       0 2022-06-11 23:18 /home/slava/src/
+-rw-rw-r-- slava/slava       4 2022-06-11 17:44 /home/slava/src/3.txt
+-rw-r--r-- root/root        22 2022-06-11 23:10 /home/slava/src/5.txt
+-rw-rw-r-- slava/slava      25 2022-06-11 23:18 /home/slava/src/6.txt
+-rw-rw-r-- slava/slava   10240 2022-06-11 16:51 /home/slava/src/1.txt
+-rw-rw-r-- slava/slava      11 2022-05-01 22:08 /home/slava/src/4.log
+
+=====================================================
+12-Jun-2022 09:31
+drwxrwxr-x slava/slava       0 2022-06-11 23:18 /home/slava/src/
+-rw-rw-r-- slava/slava       4 2022-06-11 17:44 /home/slava/src/3.txt
+-rw-r--r-- root/root        22 2022-06-11 23:10 /home/slava/src/5.txt
+-rw-rw-r-- slava/slava      25 2022-06-11 23:18 /home/slava/src/6.txt
+-rw-rw-r-- slava/slava   10240 2022-06-11 16:51 /home/slava/src/1.txt
+-rw-rw-r-- slava/slava      11 2022-05-01 22:08 /home/slava/src/4.log
+(END)
+```
