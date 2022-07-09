@@ -81,3 +81,5 @@ program (EPAM DevOps online Winter 2022), the list of AWS services with which th
 worked within the educational program or earlier and the full list with links of completed labs
 (based on tutorials or qwiklabs). Provide the link to the website in your report and СV._
 
+Link to the website:
+[http://chudnov.pp.ua.s3-website.eu-central-1.amazonaws.com/](http://chudnov.pp.ua.s3-website.eu-central-1.amazonaws.com/)
