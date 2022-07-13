@@ -1,12 +1,12 @@
-### Link to my Final Project:
+### Link to my presentation of the Final Project:
 
-![Final Project](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/tree/main/m9/final_project)
-
+https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m9/final_project/Final_Project.pdf
+***
 ### Link to all my Labs:
 
-![All my Labs](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2)
-
-# Presentation of my project
+https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2
+***
+# Presentation of my Final Project
 
 ![Slide 1](https://github.com/VyacheslavChudnov/DevOps_online_Kharkiv_2022Q1Q2/blob/main/m9/final_project/images/Slide_01.JPG)
 
