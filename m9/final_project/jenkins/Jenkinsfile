@@ -1,0 +1,61 @@
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10'))])
+
+pipeline {
+    agent {label 'agent1'}
+    
+    tools {
+        // Install the Maven
+        maven "3.8.6"
+    }
+    
+    stages {
+        stage('Pull from GitHub') {
+            steps {
+                // Get code from a GitHub repository
+                git branch: 'main',
+                credentialsId: 'key-for-GitHub',
+                url: 'git@github.com:VyacheslavChudnov/spring-petclinic.git'
+            sh "ls -ltr"
+           }
+        }
+        
+        stage('Maven Test') {
+            steps {
+                // Make Maven test
+            echo "----------MAVEN TEST----------"
+            sh "mvn test"
+           }
+        }
+        
+        stage('Build') {
+            steps {
+                // Make Maven package
+            echo "----------MAVEN PACKAGE----------"
+            sh "mvn clean package"
+            }
+            
+            post {
+                // If Maven was able to run the tests, even if some of the test
+                // failed, record the test results and archive the jar file.
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
+            }
+        }
+        
+        stage('Delivery to Dev Server') {
+                steps {
+                // Delivery artifact to dev_server
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'dev_server',
+                    transfers: [sshTransfer(cleanRemote: false,
+                    excludes: '', execCommand: 'sudo systemctl restart petdev',
+                    execTimeout: 120000, flatten: false, makeEmptyDirs: false,
+                    noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '',
+                    remoteDirectorySDF: false, removePrefix: 'target',
+                    sourceFiles: 'target/spring-petclinic-2.7.0-SNAPSHOT.jar')],
+                    usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+            }
+        }
+    }
+}

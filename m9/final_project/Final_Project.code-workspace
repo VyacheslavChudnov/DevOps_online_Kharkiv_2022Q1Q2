@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "ansible"
+		},
+		{
+			"path": "jenkins"
+		},
+		{
+			"path": "terraform"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,29 @@
+---
+- name: Install Java
+  hosts: all
+  become: yes
+
+  vars:
+    source_file_dev: petdev.service
+    source_file_pro: petpro.service
+    destin_file: /lib/systemd/system
+
+  tasks:
+  - name: Check Linux Distro
+    debug: var=ansible_os_family
+
+  - name: Install OpenJDK
+    apt: name=openjdk-11-jdk state=latest
+    when: ansible_os_family == "Debian"
+
+  - name: Install OpenJDK
+    yum: name=java state=latest
+    when: ansible_os_family == "RedHat"
+
+  - name: Copy PetClinic service to Dev
+    copy: src={{ source_file_dev }} dest={{ destin_file }} mode=0555
+    when: ansible_os_family == "Debian"
+
+  - name: Copy PetClinic service to Prod
+    copy: src={{ source_file_pro }} dest={{ destin_file }} mode=0555
+    when: ansible_os_family == "RedHat"
